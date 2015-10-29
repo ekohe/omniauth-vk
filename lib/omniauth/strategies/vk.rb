@@ -12,6 +12,10 @@ module OmniAuth
 
       option :authorize_options, [:redirect_uri, :display, :scope, :response_type, :v, :state]
 
+      def request_phase
+        super
+      end
+
       def authorize_params
         super.tap do |params|
           %w(authorize_options client_options).each do |v|
