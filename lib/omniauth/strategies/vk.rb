@@ -1,4 +1,4 @@
-require 'omniauth-oauth2'
+require 'omniauth/strategies/oauth2'
 
 module OmniAuth
   module Strategies
@@ -6,6 +6,7 @@ module OmniAuth
     # https://vk.com/dev/authentication
     #
     class Vk < OmniAuth::Strategies::OAuth2
+      option :name, 'vk'
       option :client_options, site: 'https://api.vk.com/',
                               token_url: 'https://oauth.vk.com/access_token',
                               authorize_url: 'https://oauth.vk.com/authorize'
@@ -14,10 +15,10 @@ module OmniAuth
 
       def authorize_params
         super.tap do |params|
-          %w(authorize_options client_options).each do |v|
-            request.params[v] && params[v.to_sym] = request.params[v]
+          %i(authorize_options client_options).each do |v|
+            params[v] = request.params[v] if request.params[v]
           end
-          params['state'] && session['omniauth.state'] = params[:state]
+          session['omniauth.state'] = params[:state] if params['state']
         end
       end
 
@@ -37,11 +38,12 @@ module OmniAuth
 
       def raw_info
         access_token.options[:mode] = :query
+        access_token.options[:param_name] = :access_token
         @raw_info ||= begin
           params = { v: OmniAuth::Vk::API_VERSION }
 
           %i(lang v https test_mode fields).each do |v|
-            options[v] && params[v] = options[v]
+            params[v] = options[v] if options[v]
           end
 
           access_token.get('/method/users.get', params: params).parsed['response'].first
