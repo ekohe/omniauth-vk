@@ -1,4 +1,4 @@
-require 'omniauth/strategies/oauth2'
+require 'omniauth-oauth2'
 
 module OmniAuth
   module Strategies
@@ -6,12 +6,15 @@ module OmniAuth
     # https://vk.com/dev/authentication
     #
     class Vk < OmniAuth::Strategies::OAuth2
-      option :name, 'vk'
       option :client_options, site: 'https://api.vk.com/',
                               token_url: 'https://oauth.vk.com/access_token',
                               authorize_url: 'https://oauth.vk.com/authorize'
 
-      option :authorize_options, [:redirect_uri, :display, :scope, :response_type, :v, :state]
+      option :authorize_options, [:display, :scope, :v]
+
+      def request_phase
+        super
+      end
 
       def authorize_params
         super.tap do |params|
@@ -37,8 +40,6 @@ module OmniAuth
       end
 
       def raw_info
-        access_token.options[:mode] = :query
-        access_token.options[:param_name] = :access_token
         @raw_info ||= begin
           params = { v: OmniAuth::Vk::API_VERSION }
 
@@ -46,6 +47,7 @@ module OmniAuth
             params[v] = options[v] if options[v]
           end
 
+          access_token.options[:mode] = :query
           access_token.get('/method/users.get', params: params).parsed['response'].first
         end
       end
