@@ -1,7 +1,7 @@
 module OmniAuth
   # Gem version
   module Vk
-    VERSION = '1.0.6'
+    VERSION = '1.0.7'
     API_VERSION = '5.37'
   end
 end
