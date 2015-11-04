@@ -12,10 +12,6 @@ module OmniAuth
 
       option :authorize_options, [:display, :scope, :v]
 
-      def request_phase
-        super
-      end
-
       def authorize_params
         super.tap do |params|
           %i(authorize_options client_options).each do |v|
@@ -28,11 +24,7 @@ module OmniAuth
       uid { raw_info['id'] }
 
       info do
-        {
-          name: [raw_info['first_name'], raw_info['last_name']].join(' '),
-          first_name: raw_info['first_name'],
-          last_name: raw_info['last_name']
-        }.merge access_token.params
+        { name: [raw_info['first_name'], raw_info['last_name']].join(' ') }.merge! access_token.params
       end
 
       extra do
