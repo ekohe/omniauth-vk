@@ -24,7 +24,8 @@ module OmniAuth
       uid { raw_info['id'] }
 
       info do
-        { name: [raw_info['first_name'], raw_info['last_name']].join(' ') }.merge! access_token.params
+        { name: [raw_info['first_name'],
+                 raw_info['last_name']].join(' ') }.merge! access_token.params
       end
 
       extra do
@@ -40,7 +41,8 @@ module OmniAuth
           end
 
           access_token.options[:mode] = :query
-          access_token.get('/method/users.get', params: params).parsed['response'].first
+          access_token.get('/method/users.get',
+                           params: params).parsed['response'].first
         end
       end
 

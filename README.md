@@ -1,5 +1,5 @@
 # omniauth-vk
-Authorization OmniAuth strategy for [vk.com](https://vk.com). Current [api version](https://vk.com/dev/versions) is 5.37.
+Authorization OmniAuth strategy for [vk.com](https://vk.com). Current [api version](https://vk.com/dev/versions) is 5.42.
 More details [here](https://vk.com/dev)
 ### Installation
 Add to your `Gemfile`
@@ -38,7 +38,7 @@ config.omniauth :vk, ENV['VK_KEY'],
                      display: 'popup',
                      # List of Available Settings of Access Permissions https://vk.com/dev/permissions
                      scope: 'email, friends',
-                     v: 3.57
+                     v: 3.42
 ```
 and [api request parameters](https://vk.com/dev/api_requests)
  ```ruby
@@ -57,7 +57,7 @@ config.omniauth :vk, ENV['VK_KEY'],
     "name"=>"Павел Дуров",
     "first_name"=>"Павел",
     "last_name"=>"Дуров",
-    "user_id"=>"13579368"
+    "user_id"=>"1"
   },
   "credentials"=> {
     "token"=> "187041a618229fdaf16613e96e1caabc1e86e46bbfad228de41520e63fe45873684c365a14417289599f3",
