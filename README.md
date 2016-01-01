@@ -1,3 +1,4 @@
+https://rubygems.org/gems/omniauth-vk
 # omniauth-vk
 Authorization OmniAuth strategy for [vk.com](https://vk.com). Current [api version](https://vk.com/dev/versions) is 5.42.
 More details [here](https://vk.com/dev)
@@ -38,7 +39,7 @@ config.omniauth :vk, ENV['VK_KEY'],
                      display: 'popup',
                      # List of Available Settings of Access Permissions https://vk.com/dev/permissions
                      scope: 'email, friends',
-                     v: 3.42
+                     v: 5.42
 ```
 and [api request parameters](https://vk.com/dev/api_requests)
  ```ruby
