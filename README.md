@@ -1,6 +1,6 @@
 https://rubygems.org/gems/omniauth-vk
 # omniauth-vk
-Authorization OmniAuth strategy for [vk.com](https://vk.com). Current [api version](https://vk.com/dev/versions) is 5.42.
+Authorization OmniAuth strategy for [vk.com](https://vk.com). Current [api version](https://vk.com/dev/versions) is 5.45.
 More details [here](https://vk.com/dev)
 ### Installation
 Add to your `Gemfile`
