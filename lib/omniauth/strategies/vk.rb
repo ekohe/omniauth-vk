@@ -10,7 +10,7 @@ module OmniAuth
                               token_url: 'https://oauth.vk.com/access_token',
                               authorize_url: 'https://oauth.vk.com/authorize'
 
-      option :authorize_options, [:display, :scope, :v]
+      option :authorize_options, [:display, :scope, :v, :response_type]
 
       def authorize_params
         super.tap do |params|
